@@ -1,0 +1,44 @@
+Layout for UDL
+
+- cards only have a graphical representation while in play: 
+  separate classes for card-as-data and card-as-game-piece (MonoBehaviour)
+  CADs contain:
+	- cost
+	- effect
+	- when the card can appear
+  CAGs contain:
+    - underlying card
+    - current zone
+    - selection state
+	
+- zones always(?) have a graphical representation
+  2 kinds of zone: Stack(deck & discard pile) and Array (hand & market)
+  Zones track: 
+  - the cards they contain
+  - the zone cards go to when they leave (deck->hand->discard->deck and market->hand)
+  Each zone has some unique behavior -> zone heirarchy: 
+  * Zone
+	/Stack
+	  /Deck
+	  /Discard
+    /Array
+	  /Hand
+	  /Market
+  
+- Resources
+  Referenced by cards and also market
+  
+- Player: mostly a collection of game data
+  * HP 
+  * Buffs/debuffs
+  * Persistent info
+  
+- Opponent: damage/effect output algorithm
+  Has display component, similar to player
+  These are maybe GameObjects? They don't quite make sense as code concepts
+  
+- Bosses:
+  Like Opponents but with different rules for taking damage
+  
+
+  
