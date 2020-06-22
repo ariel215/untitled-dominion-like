@@ -4,8 +4,6 @@ using Effects;
 
 public enum ResourceType { Early, Mid, Late};
 
-
-
 public class Card
 {
 
@@ -13,11 +11,15 @@ public class Card
     public int Cost { get; private set; }
     public Effect Effect { get; private set; }
 
-    Card(ResourceType type, int cost, Effect effect)
+    int MinDamage, MaxDamage;
+
+    Card(ResourceType type, int cost, Effect effect, int min, int max)
     {
         CostType = type;
         Cost = cost;
         Effect = effect;
+        MinDamage = min;
+        MaxDamage = max;
     }
     
-}
+}   
