@@ -8,11 +8,11 @@ public class GameState
     public static GameState Game { get; private set; } = null;
 
 
-    public Pile deck;
-    public Pile discard;
-    public Row hand;
-    public Row market;
-    public Pile cardPool;
+    public Zones.Stack deck;
+    public Zones.Stack discard;
+    public Array hand;
+    public Array market;
+    public Zones.Stack cardPool;
 
     public Dictionary<ResourceType, int> Resources;
     
