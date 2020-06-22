@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using Cards;
 namespace Zones
 {
     public enum VisibleSetting { All, None, Top };
-    public abstract class Zone
+    public abstract class Zone: MonoBehaviour
     {
         protected static readonly System.Random random = new System.Random();
 
