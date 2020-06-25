@@ -8,6 +8,7 @@ namespace Zones
 
         public static Hand gHand;
         public static int HandSize = 5;
+        public CardDisplay Display;
 
         public Hand()
         {
@@ -15,8 +16,9 @@ namespace Zones
         }
 
         // Use this for initialization
-        void Start()
+        new void Start()
         {
+            base.Start();
             Destination = Discard.gDiscard;
         }
 
@@ -36,7 +38,6 @@ namespace Zones
             {
                 Deck.gDeck.Draw();
             }
-            
         }
     }
 }

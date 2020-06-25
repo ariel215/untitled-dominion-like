@@ -8,10 +8,10 @@ public class GameState
     public static GameState Game { get; private set; } = null;
 
 
-    public Zones.Stack deck;
-    public Zones.Stack discard;
-    public Array hand;
-    public Array market;
+    public Deck deck;
+    public Discard discard;
+    public Hand hand;
+    public Market market;
     public Zones.Stack cardPool;
 
     public Dictionary<ResourceType, int> Resources;
@@ -23,35 +23,14 @@ public class GameState
     public void ResetTurn()
     {
         //Player pitches their hand...
-        hand.MoveAll(discard);
         // and draws a new one
-        DrawNewHand();
 
         // Resources reset
-        foreach (var kind in Resources.Keys)
-        {
-            Resources[kind] = player.BaseResourceNumber[kind];
-        }
         // Market resets
-        market.Add(cardPool.Draw);
 
     }
 
     private void DrawNewHand()
     {
-        List<Card> newHand;
-        if (deck.Count > hand.Size)
-        {
-            newHand = deck.Draw(hand.Size);
-        }
-        else
-        {
-            newHand = deck.Draw(deck.Count);
-            var remaining = hand.Size - hand.Count;
-            discard.MoveAll(deck);
-            deck.Shuffle();
-            newHand.AddRange(deck.Draw(remaining));
-        }
-        hand.Add(newHand);
     }
 }

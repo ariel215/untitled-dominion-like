@@ -51,13 +51,21 @@ namespace Zones
 
     }
 
+    [RequireComponent(typeof(CardDisplay))]
     public abstract class Array : Zone
     {
 
-        List<CardData> Cards;
+        List<CardData> Cards = new List<CardData>();
+        CardDisplay Display;
+
         public override IEnumerable<CardData> GetCards()
         {
             return Cards;
+        }
+
+        public void Start()
+        {
+            Display = GetComponent<CardDisplay>();
         }
 
         protected override bool Add(CardData card)
@@ -73,11 +81,12 @@ namespace Zones
             return false;
         }
 
-        public bool Add(CardData card, int index)
+        public bool Add(CardData card, int idx)
         {
-            if (Cards[index] == null)
+            if (Cards[idx] == null)
             {
-                Cards[index] = card;
+                Cards[idx] = card;
+                Display.Add(card, idx);
                 return true;
             }
             return false;
@@ -90,6 +99,7 @@ namespace Zones
             if (idx >= 0)
             {
                 Cards[idx] = null;
+                Display.Remove(idx);
                 return true;
             }
             return false;

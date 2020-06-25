@@ -16,8 +16,9 @@ namespace Zones
             gMarket = this;
         }
         // Use this for initialization
-        void Start()
+        new void Start()
         {
+            base.Start();
             Destination = Discard.gDiscard;
         }
 

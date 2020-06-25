@@ -8,7 +8,7 @@ public class CardPool
 
     private List<CardData> Cards;
     Player Player;
-    Dictionary<string, GameObject> cardPrefabs;
+    Dictionary<string, GameObject> cardPrefabs = new Dictionary<string, GameObject>();
 
     public static CardPool Load(string path, Player player)
     {
