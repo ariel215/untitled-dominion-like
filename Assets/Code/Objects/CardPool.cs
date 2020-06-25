@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Cards;
+
 public class CardPool
 {
 
-    private List<Card> cards;
+    private List<CardData> cards;
     Player Player;
 
     public static CardPool Load(string path, Player player)
@@ -16,4 +18,16 @@ public class CardPool
     {
         Player = p;
     }
+
+    public CardData Fixed()
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<CardData> Select(int n)
+    {
+        throw new NotImplementedException();
+    }
+
+
 }

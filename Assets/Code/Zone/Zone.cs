@@ -1,17 +1,24 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using Cards;
+
 namespace Zones
 {
     public enum VisibleSetting { All, None, Top };
     public abstract class Zone : MonoBehaviour
     {
 
-        public abstract IEnumerable<Card> GetCards();
-        public Zone Destination { get; private set; }
+        public abstract IEnumerable<CardData> GetCards();
+        public Zone Destination { get; protected set; }
 
-        public abstract bool Add(Card card);
+        protected abstract bool Add(CardData card);
+        protected abstract bool Remove(CardData card);
+
+        public bool Move(CardData card)
+        {
+            return Remove(card) && Destination.Move(card);
+        }
+
     }
 
     
@@ -20,21 +27,26 @@ namespace Zones
     {
 
         
-        private Stack<Card> Cards;
-        public override IEnumerable<Card> GetCards()
+        protected Stack<CardData> Cards;
+        public override IEnumerable<CardData> GetCards()
         {
             return Cards;
         }
 
-        public override bool Add(Card card)
+        protected override bool Add(CardData card)
         {
             Cards.Push(card);
             return true;
         }
 
-        public Card Draw()
+        protected override bool Remove(CardData card)
         {
-            return Cards.Pop();
+            if (card == Cards.Peek())
+            {
+                Cards.Pop();
+                return true;
+            }
+            return false;
         }
 
     }
@@ -42,13 +54,13 @@ namespace Zones
     public abstract class Array : Zone
     {
 
-        List<Card> Cards;
-        public override IEnumerable<Card> GetCards()
+        List<CardData> Cards;
+        public override IEnumerable<CardData> GetCards()
         {
             return Cards;
         }
 
-        public override bool Add(Card card)
+        protected override bool Add(CardData card)
         {
             for (int i = 0; i < Cards.Count; ++i)
             {
@@ -61,7 +73,7 @@ namespace Zones
             return false;
         }
 
-        public bool Add(Card card, int index)
+        public bool Add(CardData card, int index)
         {
             if (Cards[index] == null)
             {
@@ -70,6 +82,17 @@ namespace Zones
             }
             return false;
 
+        }
+
+        protected override bool Remove(CardData card)
+        {
+            var idx = Cards.FindIndex(x => x == card);
+            if (idx >= 0)
+            {
+                Cards[idx] = null;
+                return true;
+            }
+            return false;
         }
     }
         
