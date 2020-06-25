@@ -7,6 +7,7 @@ namespace Zones
     {
 
         public static Hand gHand;
+        public static int HandSize = 5;
 
         public Hand()
         {
@@ -23,6 +24,19 @@ namespace Zones
         void Update()
         {
 
+        }
+
+        void ResetCards()
+        {
+            foreach(var card in GetCards())
+            {
+                Move(card);
+            }
+            for (int i = 0; i < HandSize; i++)
+            {
+                Deck.gDeck.Draw();
+            }
+            
         }
     }
 }

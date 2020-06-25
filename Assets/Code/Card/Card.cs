@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 namespace Cards
 {
@@ -14,12 +13,14 @@ namespace Cards
         {
             if (Selected)
             {
-                Zone.Move(this);
+                Zone.Move(CardData);
+                Zone = Zone.Destination;
             }
             else
             {
                 Selected = true;
             }
         }
+
     }
 }

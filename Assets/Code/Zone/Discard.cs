@@ -12,6 +12,15 @@ namespace Zones
             gDiscard = this;
         }
 
+
+        public void MoveAll()
+        {
+            while(Cards.Count > 0)
+            {
+                Move(Cards.Peek());
+            }
+        }
+
         // Use this for initialization
         void Start()
         {

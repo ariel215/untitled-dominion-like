@@ -49,6 +49,11 @@ namespace Zones
 
         public void Draw()
         {
+            if (Cards.Count == 0)
+            {
+                Discard.gDiscard.MoveAll();
+                Shuffle();
+            }
             Move(Cards.Peek());
         }
 
