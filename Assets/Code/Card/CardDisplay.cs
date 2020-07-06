@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using Zones;
+
 using Cards;
 
 /// <summary>
 /// 
 /// </summary>
-
+[RequireComponent(typeof(SpriteRenderer))]
 public class CardDisplay : MonoBehaviour
 {
 
@@ -14,6 +14,7 @@ public class CardDisplay : MonoBehaviour
     public Vector2 LeftEdge;
     public float CardSize;
     public float MarginSize;
+    SpriteRenderer renderer;
 
     List<GameObject> CardObjects = new List<GameObject>();
 
@@ -21,7 +22,9 @@ public class CardDisplay : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        LeftEdge = transform.position;  
+        renderer = GetComponent<SpriteRenderer>();
+        LeftEdge = transform.position;
+        LeftEdge.x -= renderer.bounds.extents.x;
     }
 
     // Update is called once per frame
@@ -48,6 +51,13 @@ public class CardDisplay : MonoBehaviour
             }
         }
         CardObjects[idx] = CardPool.GetObject(cardData);
+        // take the opportunity to initialize card size
+        if (CardSize == 0)
+        {
+            var renderer = CardObjects[idx].GetComponent<SpriteRenderer>();
+            CardSize = renderer.bounds.extents.x;
+            LeftEdge.x += CardSize;
+        }
     }
 
     public void Remove(int idx)
