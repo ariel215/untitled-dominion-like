@@ -3,37 +3,46 @@ using System.Collections;
 using System.Collections.Generic;
 using Effects;
 
-public enum ResourceType { Early, Mid, Late};
+public enum ResourceType { Early=0, Mid, Late};
 
 
 namespace Cards
 {
-    public class CardData
+
+    [CreateAssetMenu(fileName ="New Card", menuName ="Card", order =0)]
+    public class CardData: ScriptableObject
     {
 
-        public ResourceType CostType { get; private set; }
-        public string Name { get; private set; }
-        public int Cost { get; private set; }
-        public int MinDamage { get; private set; }
-        public int MaxDamage { get; private set; }
-        public Effect Effect { get; private set; }
+        [SerializeField]
+        private ResourceType costType;
+        public ResourceType CostType() { return costType; }
+
+        [SerializeField]
+        private string cardName;
+        public string Name() { return cardName; }
+        [SerializeField]
+        private int cost;
+        public int Cost() { return cost; }
+        [SerializeField]
+        private int min_damage;
+        public int MinDamage() { return min_damage; }
+        [SerializeField]
+        private int max_damage;
+        public int MaxDamage() { return max_damage; }
+        [SerializeField]
+        public List<Effect> effects;
 
 
-        CardData(string name, ResourceType type, int cost, Effect effect, int min, int max)
+        public int CompareMin(CardData other)
         {
-            Name = name;
-            CostType = type;
-            Cost = cost;
-            Effect = effect;
-            MinDamage = min;
-            MaxDamage = max;
+            return min_damage.CompareTo(other.min_damage);
         }
 
-        public int Compare(CardData other)
+        public int CompareMax(CardData other)
         {
-            return MinDamage.CompareTo(other.MinDamage);
+            return max_damage.CompareTo(other.max_damage);
         }
-
 
     }
+
 }

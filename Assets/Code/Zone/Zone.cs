@@ -59,7 +59,7 @@ namespace Zones
         CardDisplay Display;
 
         public override IEnumerable<CardData> GetCards()
-        {
+        {   
             return Cards;
         }
 

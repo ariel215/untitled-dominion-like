@@ -8,7 +8,6 @@ namespace Zones
 
         public static Hand gHand;
         public static int HandSize = 5;
-        public CardDisplay Display;
 
         public Hand()
         {
@@ -22,11 +21,6 @@ namespace Zones
             Destination = Discard.gDiscard;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 
         void ResetCards()
         {

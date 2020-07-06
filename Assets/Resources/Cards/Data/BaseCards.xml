@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<cards>
+  <card>
+    <name>Test Card</name>
+    <cost>0</cost>
+    <mindamage>0</mindamage>
+    <maxdamage>100</maxdamage>
+    <costtype>1</costtype>
+    <effects></effects>
+  </card>
+</cards>

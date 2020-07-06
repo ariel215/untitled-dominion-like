@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class Player
+public class Player: ScriptableObject
 {
     public Dictionary<ResourceType, int> BaseResourceNumber = new Dictionary<ResourceType, int>
     {
@@ -9,4 +10,13 @@ public class Player
         {ResourceType.Mid,0 },
         {ResourceType.Late,0 }
     };
+
+    public int Health
+    {
+        get
+        {
+            throw new NotImplementedException();
+        }
+        set { }
+    }
 }
