@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+
 
 namespace Zones
 {
@@ -13,6 +15,23 @@ namespace Zones
         {
             gDeck = this;
             Random = new System.Random();
+            Destination = Hand.gHand;
+        }
+
+
+        public void Init(IEnumerable<Cards.CardData> cards)
+        {
+            Cards.Clear();
+            foreach (var c in cards)
+            {
+                Cards.Push(c);
+            }
+            Shuffle();
+        }
+
+        public void Init(CardPool pool)
+        {
+            Init(pool.Cards);
         }
 
         //Fisher-Yates random permutation
@@ -47,14 +66,14 @@ namespace Zones
             }
         }
 
-        public void Draw()
+        public bool Draw()
         {
             if (Cards.Count == 0)
             {
                 Discard.gDiscard.MoveAll();
                 Shuffle();
             }
-            Move(Cards.Peek());
+            return Move(Cards.Peek());
         }
 
         // Use this for initialization

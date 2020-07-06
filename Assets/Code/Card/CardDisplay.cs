@@ -21,13 +21,13 @@ public class CardDisplay : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        LeftEdge = transform.position;
+        LeftEdge = transform.position;  
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < CardObjects.Capacity; ++i)
+        for (int i = 0; i < CardObjects.Count; ++i)
         {
             var pos = new Vector2(LeftEdge.x, LeftEdge.y);
             pos.x += (2 * MarginSize) + CardSize;
@@ -40,9 +40,12 @@ public class CardDisplay : MonoBehaviour
 
     public void Add(CardData cardData, int idx)
     {
-        if (idx >= CardObjects.Capacity)
+        if (idx >= CardObjects.Count)
         {
-            CardObjects.Capacity = idx + 1;
+            while (CardObjects.Count <= idx)
+            {
+                CardObjects.Add(null);
+            }
         }
         CardObjects[idx] = CardPool.GetObject(cardData);
     }

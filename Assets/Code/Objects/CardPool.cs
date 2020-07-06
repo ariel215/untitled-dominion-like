@@ -6,7 +6,7 @@ using Cards;
 public class CardPool: MonoBehaviour
 {
 
-    private List<CardData> Cards = new List<CardData>();
+    public List<CardData> Cards { get; private set;}    = new List<CardData>();
     public TextAsset cardNames;
 
     Player Player;
@@ -20,7 +20,9 @@ public class CardPool: MonoBehaviour
             var name = line.Trim();
             var data = Resources.Load<CardData>($"Cards/Data/{name}");
             Cards.Add(data);
+            name = data.Name();
             cardPrefabs[name] = Resources.Load<GameObject>($"Cards/Prefabs/{name}");
+            Debug.Log(cardPrefabs[name]);
         }
         Cards.Sort((x, y) => x.CompareMin(y));
     }

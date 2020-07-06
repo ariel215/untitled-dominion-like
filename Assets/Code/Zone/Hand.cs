@@ -9,9 +9,15 @@ namespace Zones
         public static Hand gHand;
         public static int HandSize = 5;
 
+        public int nCards = 0;
+
         public Hand()
         {
             gHand = this;
+            for (int i = 0; i < HandSize; ++i)
+            {
+                Cards.Add(null);
+            }
         }
 
         // Use this for initialization
@@ -19,6 +25,11 @@ namespace Zones
         {
             base.Start();
             Destination = Discard.gDiscard;
+        }
+
+        private void Update()
+        {
+            nCards = Cards.Count;
         }
 
 

@@ -16,7 +16,18 @@ namespace Zones
 
         public bool Move(CardData card)
         {
-            return Remove(card) && Destination.Move(card);
+            var removed = Remove(card);
+            if (!removed)
+            {
+                Debug.Log($"Could not remove {card}");
+                return false;
+            }
+            var added = Destination.Add(card);
+            if (!added)
+            {
+                Debug.Log($"Could not add {card}");
+            }
+            return added;
         }
 
     }
@@ -26,8 +37,8 @@ namespace Zones
     public abstract class Stack : Zone
     {
 
-        
-        protected Stack<CardData> Cards;
+
+        protected Stack<CardData> Cards = new Stack<CardData>();
         public override IEnumerable<CardData> GetCards()
         {
             return Cards;
@@ -55,7 +66,7 @@ namespace Zones
     public abstract class Array : Zone
     {
 
-        List<CardData> Cards = new List<CardData>();
+        protected List<CardData> Cards = new List<CardData>();
         CardDisplay Display;
 
         public override IEnumerable<CardData> GetCards()
