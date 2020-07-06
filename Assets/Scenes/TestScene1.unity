@@ -742,7 +742,7 @@ MonoBehaviour:
   CardPool: {fileID: 1012924425}
   LeftEdge: {x: 0, y: 0}
   CardSize: 0
-  MarginSize: 0
+  MarginSize: 0.1
 --- !u!1 &1916967172
 GameObject:
   m_ObjectHideFlags: 0

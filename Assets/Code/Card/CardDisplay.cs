@@ -28,12 +28,13 @@ public class CardDisplay : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void LateUpdate()
     {
         for (int i = 0; i < CardObjects.Count; ++i)
         {
             var pos = new Vector2(LeftEdge.x, LeftEdge.y);
-            pos.x += (2 * MarginSize) + CardSize;
+            pos.x += i * 2 * (MarginSize + CardSize);
+            Debug.Log($"Card {i} at position {pos.x}");
             if (CardObjects[i] != null)
             {
                 CardObjects[i].transform.position = pos;
@@ -56,7 +57,7 @@ public class CardDisplay : MonoBehaviour
         {
             var renderer = CardObjects[idx].GetComponent<SpriteRenderer>();
             CardSize = renderer.bounds.extents.x;
-            LeftEdge.x += CardSize;
+            LeftEdge.x += CardSize + MarginSize;
         }
     }
 
