@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-
+using Cards;
+using System;
 
 namespace Zones
 {
@@ -18,8 +19,14 @@ namespace Zones
             Destination = Hand.gHand;
         }
 
+        new void Start()
+        {
+            base.Start();
+            Destination = Hand.gHand;
+        }
 
-        public void Init(IEnumerable<Cards.CardData> cards)
+
+        public void Init(IEnumerable<CardData> cards)
         {
             Cards.Clear();
             foreach (var c in cards)
@@ -29,10 +36,7 @@ namespace Zones
             Shuffle();
         }
 
-        public void Init(CardPool pool)
-        {
-            Init(pool.Cards);
-        }
+        
 
         //Fisher-Yates random permutation
         public void Shuffle()
@@ -74,12 +78,6 @@ namespace Zones
                 Shuffle();
             }
             return Move(Cards.Peek());
-        }
-
-        // Use this for initialization
-        void Start()
-        {
-            Destination = Hand.gHand;
         }
 
         // Update is called once per frame

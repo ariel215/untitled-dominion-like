@@ -14,15 +14,12 @@ namespace Zones
         public Hand()
         {
             gHand = this;
-            for (int i = 0; i < HandSize; ++i)
-            {
-                Cards.Add(null);
-            }
         }
 
         // Use this for initialization
         new void Start()
         {
+            Size = HandSize;
             base.Start();
             Destination = Discard.gDiscard;
         }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 
 namespace Zones
@@ -8,38 +7,47 @@ namespace Zones
     {
         public static Market gMarket;
 
-        protected CardPool CardPool;
+        public CardPool RandomCardPool;
+        public CardPool FixedCardPool;
+
         public int MarketSize = 4;
+
+
 
         public Market()
         {
             gMarket = this;
         }
         // Use this for initialization
-        new void Start()
+        public override void Start ()
         {
+            Debug.Log("Market.Start");
+            Size = MarketSize + 1;
             base.Start();
             Destination = Discard.gDiscard;
+         
         }
 
         // Update is called once per frame
         void Update()
         {
-
+            
         }
 
         public void ResetCards()
         {
-            foreach (var card in GetCards())
+            for (int i = 0; i < Cards.Count; ++i)
             {
-                Remove(card);
+                Cards[i] = null;
+                Display.Remove(i);
             }
 
-            foreach (var newcard in CardPool.Select(MarketSize))
+            Debug.Log(RandomCardPool.Cards.Count);
+            foreach (var newcard in RandomCardPool.Select(MarketSize))
             {
                 Add(newcard);
-                Add(CardPool.Fixed());
             }
+            Add(FixedCardPool.Select(1)[0]);
         }
     }
 

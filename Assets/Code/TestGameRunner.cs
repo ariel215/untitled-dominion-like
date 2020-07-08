@@ -7,7 +7,7 @@ using Zones;
 public class TestGameRunner  : MonoBehaviour
 {
 
-    public CardPool CardPool;
+    public TextAsset DeckList;
 
     Button button;
 
@@ -15,7 +15,6 @@ public class TestGameRunner  : MonoBehaviour
     private void Start()
     {
         button = GetComponent<Button>();
-        Debug.Log(button);
         button.onClick.AddListener(OnPress);
     }
 
@@ -23,12 +22,13 @@ public class TestGameRunner  : MonoBehaviour
     private void OnPress()
     {
         button = GetComponent<Button>();
-        Deck.gDeck.Init(CardPool);
+        Deck.gDeck.Init(Cards.CardData.LoadList(DeckList));
         var deckcards = new List<Cards.CardData>(Deck.gDeck.GetCards());
         for (var i = 0; i < Hand.HandSize; ++i)
         {
             Deck.gDeck.Draw();
         }
+        Market.gMarket.ResetCards();
     }
 
     

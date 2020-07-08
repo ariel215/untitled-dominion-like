@@ -16,5 +16,6 @@ MonoBehaviour:
   cardName: Test Card
   cost: 0
   min_damage: 0
-  max_damage: 500
+  max_damage: 100
+  kind: 0
   effects: []

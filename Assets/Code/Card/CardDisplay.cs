@@ -4,19 +4,23 @@ using System.Collections.Generic;
 using Cards;
 
 /// <summary>
-/// 
+/// Component that knows how to render a list of cards
+/// centered on the attatched GameObject
 /// </summary>
 [RequireComponent(typeof(SpriteRenderer))]
 public class CardDisplay : MonoBehaviour
 {
+    // Cache of card prefabs
+    private static Dictionary<string, GameObject> Prefabs = new Dictionary<string, GameObject>();
 
-    public CardPool CardPool;
     public Vector2 LeftEdge;
     public float CardSize;
     public float MarginSize;
     SpriteRenderer renderer;
 
-    List<GameObject> CardObjects = new List<GameObject>();
+    // List of cards being rendered
+    public List<GameObject> CardObjects = new List<GameObject>();
+
 
 
     // Use this for initialization
@@ -34,7 +38,6 @@ public class CardDisplay : MonoBehaviour
         {
             var pos = new Vector2(LeftEdge.x, LeftEdge.y);
             pos.x += i * 2 * (MarginSize + CardSize);
-            Debug.Log($"Card {i} at position {pos.x}");
             if (CardObjects[i] != null)
             {
                 CardObjects[i].transform.position = pos;
@@ -44,6 +47,7 @@ public class CardDisplay : MonoBehaviour
 
     public void Add(CardData cardData, int idx)
     {
+        // Resize list to hold up to the given index
         if (idx >= CardObjects.Count)
         {
             while (CardObjects.Count <= idx)
@@ -51,7 +55,18 @@ public class CardDisplay : MonoBehaviour
                 CardObjects.Add(null);
             }
         }
-        CardObjects[idx] = CardPool.GetObject(cardData);
+        
+        var name = cardData.Name();
+
+        // Initialize cache if necessary
+        if (!Prefabs.ContainsKey(name))
+        {
+            var fab = Resources.Load<GameObject>($"Cards/Prefabs/{name}");
+            Prefabs[name] = fab ?? throw new System.Exception($"Could not find prefab {name}")
+;
+        }
+
+        CardObjects[idx] = Instantiate(Prefabs[name]);
         // take the opportunity to initialize card size
         if (CardSize == 0)
         {
@@ -63,7 +78,13 @@ public class CardDisplay : MonoBehaviour
 
     public void Remove(int idx)
     {
-        CardObjects[idx] = null;
+        if (idx < CardObjects.Count)
+        {
+            var obj = CardObjects[idx];
+            CardObjects[idx] = null;
+            Destroy(obj);
+        }
+
     }
 
 

@@ -30,6 +30,11 @@ namespace Zones
             return added;
         }
 
+        public virtual void Start()
+        {
+            
+        }
+
     }
 
     
@@ -67,16 +72,22 @@ namespace Zones
     {
 
         protected List<CardData> Cards = new List<CardData>();
-        CardDisplay Display;
+        protected CardDisplay Display;
+        protected int Size;
 
         public override IEnumerable<CardData> GetCards()
         {   
             return Cards;
         }
 
-        public void Start()
+        public override void Start()
         {
+            Debug.Log("Array.Start");
             Display = GetComponent<CardDisplay>();
+            for (int i = 0; i < Size; ++i)
+            {
+                Cards.Add(null);
+            }
         }
 
         protected override bool Add(CardData card)
@@ -106,6 +117,10 @@ namespace Zones
 
         protected override bool Remove(CardData card)
         {
+            if (card == null)
+            {
+                return true;
+            }
             var idx = Cards.FindIndex(x => x == card);
             if (idx >= 0)
             {

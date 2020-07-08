@@ -1,30 +1,30 @@
-﻿using UnityEngine;
+﻿using Cards;
 using System.Collections.Generic;
-using System;
-using Cards;
+using UnityEngine;
 
 public class CardPool: MonoBehaviour
 {
 
-    public List<CardData> Cards { get; private set;}    = new List<CardData>();
+    public List<CardData> Cards;
     public TextAsset cardNames;
 
     Player Player;
     Dictionary<string, GameObject> cardPrefabs = new Dictionary<string, GameObject>();
 
+    [SerializeField]
+    List<string> names;
+
     private void Start()
     {
-        string[] seps = { "\r", "\n", "\r\n" };
-        foreach(var line in cardNames.text.Split(seps, StringSplitOptions.RemoveEmptyEntries))
-        {
-            var name = line.Trim();
-            var data = Resources.Load<CardData>($"Cards/Data/{name}");
-            Cards.Add(data);
-            name = data.Name();
-            cardPrefabs[name] = Resources.Load<GameObject>($"Cards/Prefabs/{name}");
-            Debug.Log(cardPrefabs[name]);
-        }
+        Player = Player.Instance;
+        Cards = CardData.LoadList(cardNames);
+        
         Cards.Sort((x, y) => x.CompareMin(y));
+    }
+
+    private void Update()
+    {
+        names = new List<string>(cardPrefabs.Keys);
     }
 
 
@@ -38,16 +38,13 @@ public class CardPool: MonoBehaviour
 
     }
 
-    public CardData Fixed()
-    {
-        throw new NotImplementedException();
-    }
-
     public List<CardData> Select(int n)
     {
-        var health = Player.Health;
-        var playable = Cards.FindAll((x => x.MinDamage() > health));
-        playable = playable.FindAll(x => x.MaxDamage() > health);
+        var health = Player.Health();
+        var playable = Cards.FindAll(
+            (x => (x.MinDamage() <= health) && (health <= x.MaxDamage()))
+            );
+        Debug.Log($"Found {playable.Count} playable cards");
         var selected = new List<CardData>();
         for (var i = 0; i < n; i++)
         {
@@ -58,27 +55,5 @@ public class CardPool: MonoBehaviour
         }
         return selected;
     }
-
-    void LoadPrefabs()
-    {
-        foreach(var card in Cards)
-        {
-            cardPrefabs[card.Name()] = Resources.Load<GameObject>(card.Name());
-        }
-    }
-
-    public GameObject GetObject(CardData card)
-    {
-        return GameObject.Instantiate(cardPrefabs[card.Name()]);
-    }
-
-    public GameObject GetObject(string name)
-    {
-        return GameObject.Instantiate(cardPrefabs[name]);
-    }
-
-
-
-
 
 }
