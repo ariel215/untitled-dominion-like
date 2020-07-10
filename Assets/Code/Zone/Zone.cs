@@ -4,12 +4,11 @@ using Cards;
 
 namespace Zones
 {
-    public enum VisibleSetting { All, None, Top };
     public abstract class Zone : MonoBehaviour
     {
 
         public abstract IEnumerable<CardData> GetCards();
-        public Zone Destination { get; protected set; }
+        public Zone Destination;
 
         protected abstract bool Add(CardData card);
         protected abstract bool Remove(CardData card);
@@ -21,6 +20,10 @@ namespace Zones
             {
                 Debug.Log($"Could not remove {card}");
                 return false;
+            }
+            if (Destination == null)
+            {
+                throw new System.Exception("Destination not set");
             }
             var added = Destination.Add(card);
             if (!added)
@@ -108,11 +111,16 @@ namespace Zones
             if (Cards[idx] == null)
             {
                 Cards[idx] = card;
-                Display.Add(card, idx);
+                Display.Add(card, idx, this);
                 return true;
             }
             return false;
 
+        }
+
+        public bool Move(int idx)
+        {
+            return Move(Cards[idx]);
         }
 
         protected override bool Remove(CardData card)
@@ -121,14 +129,19 @@ namespace Zones
             {
                 return true;
             }
-            var idx = Cards.FindIndex(x => x == card);
+            var idx = Cards.FindIndex(x => System.Object.ReferenceEquals(x,card));
             if (idx >= 0)
             {
-                Cards[idx] = null;
-                Display.Remove(idx);
-                return true;
+                Remove(idx);
             }
             return false;
+        }
+
+        protected bool Remove(int idx)
+        {
+            Cards[idx] = null;
+            Display.Remove(idx);
+            return true;
         }
     }
         

@@ -24,17 +24,13 @@ namespace Zones
             Destination = Discard.gDiscard;
         }
 
-        private void Update()
-        {
-            nCards = Cards.Count;
-        }
-
 
         void ResetCards()
         {
-            foreach(var card in GetCards())
+            for (int i = 0; i <= Cards.Count; ++i)
             {
-                Move(card);
+                Move(Cards[i]);
+                Display.Remove(i);
             }
             for (int i = 0; i < HandSize; i++)
             {

@@ -21,7 +21,11 @@ namespace Zones
         // Use this for initialization
         public override void Start ()
         {
-            Debug.Log("Market.Start");
+            if (gMarket is null)
+            {
+                throw new System.Exception("global market is null");
+            }
+
             Size = MarketSize + 1;
             base.Start();
             Destination = Discard.gDiscard;

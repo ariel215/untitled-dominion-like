@@ -4,11 +4,12 @@ using UnityEngine.Events;
 public class ButtonLike: MonoBehaviour
 {
     public UnityEvent OnClick = new UnityEvent();
-    
 
-    private void OnMouseUp()
+
+    private void OnMouseUpAsButton()
     {
         OnClick.Invoke();
     }
+   
     
 }

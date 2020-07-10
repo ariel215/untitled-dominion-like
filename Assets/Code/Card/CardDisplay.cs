@@ -45,7 +45,7 @@ public class CardDisplay : MonoBehaviour
         }
     }
 
-    public void Add(CardData cardData, int idx)
+    public void Add(CardData cardData, int idx, Zones.Zone owner)
     {
         // Resize list to hold up to the given index
         if (idx >= CardObjects.Count)
@@ -66,14 +66,18 @@ public class CardDisplay : MonoBehaviour
 ;
         }
 
-        CardObjects[idx] = Instantiate(Prefabs[name]);
+        var card = Instantiate(Prefabs[name]);
         // take the opportunity to initialize card size
         if (CardSize == 0)
         {
-            var renderer = CardObjects[idx].GetComponent<SpriteRenderer>();
+            var renderer = card.GetComponent<SpriteRenderer>();
             CardSize = renderer.bounds.extents.x;
             LeftEdge.x += CardSize + MarginSize;
         }
+        CardObjects[idx] = card;
+        var button = card.GetComponent<ButtonLike>();
+        button.OnClick.AddListener(() => owner.Move(cardData));
+        
     }
 
     public void Remove(int idx)
