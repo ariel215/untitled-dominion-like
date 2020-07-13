@@ -29,6 +29,8 @@ namespace Zones
             Size = MarketSize + 1;
             base.Start();
             Destination = Discard.gDiscard;
+            RandomCardPool = GameRunner.Runner.RandomPool;
+            FixedCardPool = GameRunner.Runner.FixedPool;
          
         }
 

@@ -9,6 +9,21 @@ namespace Zones
 
         public abstract IEnumerable<CardData> GetCards();
         public Zone Destination;
+        [SerializeField]
+        private int nCards;
+
+        private void Update()
+        {
+            nCards = 0;
+            foreach (var c in GetCards())
+            {
+                if (c != null)
+                {
+                    ++nCards;
+                }
+            }
+
+        }
 
         protected abstract bool Add(CardData card);
         protected abstract bool Remove(CardData card);
@@ -132,7 +147,7 @@ namespace Zones
             var idx = Cards.FindIndex(x => System.Object.ReferenceEquals(x,card));
             if (idx >= 0)
             {
-                Remove(idx);
+                return Remove(idx);
             }
             return false;
         }

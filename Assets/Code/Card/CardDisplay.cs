@@ -56,6 +56,7 @@ public class CardDisplay : MonoBehaviour
             }
         }
         
+        
         var name = cardData.Name();
 
         // Initialize cache if necessary
@@ -76,7 +77,10 @@ public class CardDisplay : MonoBehaviour
         }
         CardObjects[idx] = card;
         var button = card.GetComponent<ButtonLike>();
-        button.OnClick.AddListener(() => owner.Move(cardData));
+        button.OnClick.AddListener(() => {
+            cardData.ApplyEffects();
+            owner.Move(cardData);
+            });
         
     }
 

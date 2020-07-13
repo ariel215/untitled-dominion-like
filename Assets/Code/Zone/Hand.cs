@@ -9,12 +9,13 @@ namespace Zones
         public static Hand gHand;
         public static int HandSize = 5;
 
-        public int nCards = 0;
 
         public Hand()
         {
             gHand = this;
         }
+
+        
 
         // Use this for initialization
         new void Start()
@@ -24,13 +25,17 @@ namespace Zones
             Destination = Discard.gDiscard;
         }
 
-
-        void ResetCards()
+ 
+        public void ResetCards()
         {
-            for (int i = 0; i <= Cards.Count; ++i)
+            for (int i = 0; i < Cards.Count; ++i)
             {
-                Move(Cards[i]);
-                Display.Remove(i);
+                var c = Cards[i];
+                if (c != null)
+                {
+                    Move(Cards[i]);
+                    Display.Remove(i);
+                }
             }
             for (int i = 0; i < HandSize; i++)
             {

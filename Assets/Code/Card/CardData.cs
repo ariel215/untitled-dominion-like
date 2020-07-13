@@ -63,7 +63,14 @@ namespace Cards
             return cards;
         }
 
-
+        public void ApplyEffects()
+        {
+            foreach( var effect in effects)
+            {
+                effect.Apply();
+            }
+        }
+        
     }
 
 }
