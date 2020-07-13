@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Effects;
 using System;
 
-public enum ResourceType { Early=0, Mid, Late};
+
 
 
 namespace Cards
@@ -17,8 +17,8 @@ namespace Cards
     {
 
         [SerializeField]
-        private ResourceType costType;
-        public ResourceType CostType() { return costType; }
+        private GameResources.ResourceType costType;
+        public GameResources.ResourceType CostType() { return costType; }
 
         [SerializeField]
         private string cardName;

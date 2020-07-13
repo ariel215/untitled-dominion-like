@@ -21,9 +21,7 @@ public class TestGameRunner  : MonoBehaviour
 
     private void OnPress()
     {
-        button = GetComponent<Button>();
-        Deck.gDeck.Init(Cards.CardData.LoadList(DeckList));
-        var deckcards = new List<Cards.CardData>(Deck.gDeck.GetCards());
+        Deck.gDeck.Init(Cards.CardData.LoadList(DeckList));        
         for (var i = 0; i < Hand.HandSize; ++i)
         {
             Deck.gDeck.Draw();

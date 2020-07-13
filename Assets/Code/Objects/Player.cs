@@ -19,13 +19,6 @@ public class Player: ScriptableObject
         }
     }
 
-    public Dictionary<ResourceType, int> BaseResourceNumber = new Dictionary<ResourceType, int>
-    {
-        {ResourceType.Early, 0},
-        {ResourceType.Mid,0 },
-        {ResourceType.Late,0 }
-    };
-
     [SerializeField]
     private float health;
     public float Health()
