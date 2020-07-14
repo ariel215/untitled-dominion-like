@@ -77,10 +77,7 @@ public class CardDisplay : MonoBehaviour
         }
         CardObjects[idx] = card;
         var button = card.GetComponent<ButtonLike>();
-        button.OnClick.AddListener(() => {
-            cardData.ApplyEffects();
-            owner.Move(cardData);
-            });
+        owner.RegisterCallbacks(button.OnClick, cardData);
         
     }
 

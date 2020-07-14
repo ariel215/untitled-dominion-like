@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using Effects;
 using System;
@@ -12,8 +11,8 @@ namespace Cards
 
     public enum Kind { Random, Fixed };
 
-    [CreateAssetMenu(fileName ="New Card", menuName ="Card", order =0)]
-    public class CardData: ScriptableObject
+    
+    public class CardData: MonoBehaviour
     {
 
         [SerializeField]
@@ -37,7 +36,15 @@ namespace Cards
         public Kind Kind() { return kind; }
 
         [SerializeField]
-        public List<Effect> effects;
+        public Effect[] effects;
+
+        static Dictionary<string, CardData> cardCache = new Dictionary<string, CardData>();
+
+        private void Awake()
+        {
+            effects = GetComponents<Effect>();
+            Debug.Log($"{effects.GetLength(0)} effects in {name}");
+        }
 
 
         public int CompareMin(CardData other)
@@ -57,14 +64,20 @@ namespace Cards
             foreach (var line in cardNames.text.Split(seps, StringSplitOptions.RemoveEmptyEntries))
             {
                 var name = line.Trim();
-                var data = Resources.Load<CardData>($"Cards/Data/{name}");
-                cards.Add(data);
+
+                if (!cardCache.ContainsKey(name))
+                {
+                    cardCache[name] = Resources.Load<CardData>($"Cards/Data/{name}");
+                }
+                var data = Instantiate(cardCache[name]);
+                cards.Add(data ?? throw new Exception($"Could not load {name}"));
             }
             return cards;
         }
 
         public void ApplyEffects()
         {
+            Debug.Log($"Applying {effects.GetLength(0)} effects of {name}");
             foreach( var effect in effects)
             {
                 effect.Apply();

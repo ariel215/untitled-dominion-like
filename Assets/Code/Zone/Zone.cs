@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections.Generic;
 using Cards;
 
@@ -28,7 +29,11 @@ namespace Zones
         protected abstract bool Add(CardData card);
         protected abstract bool Remove(CardData card);
 
-        public bool Move(CardData card)
+        protected delegate void SelectAction(CardData card);
+
+        protected List<SelectAction> CardActions = new List<SelectAction>();
+
+        public virtual bool Move(CardData card)
         {
             var removed = Remove(card);
             if (!removed)
@@ -51,6 +56,14 @@ namespace Zones
         public virtual void Start()
         {
             
+        }
+
+        public void RegisterCallbacks(
+            UnityEvent unityEvent, CardData cardData) {
+            foreach (var action in CardActions)
+            {
+                unityEvent.AddListener(()=>action(cardData));
+            }
         }
 
     }
@@ -106,6 +119,7 @@ namespace Zones
             {
                 Cards.Add(null);
             }
+            CardActions.Add((CardData c) => Move(c));
         }
 
         protected override bool Add(CardData card)

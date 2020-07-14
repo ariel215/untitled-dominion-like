@@ -30,7 +30,6 @@ public class GameRunner  : MonoBehaviour
     {
         yield return null;
         Deck.gDeck.Init(Cards.CardData.LoadList(TestDeckList));
-        // We wait one frame to make sure everything loads
         yield return null;
         NextTurn();
     }

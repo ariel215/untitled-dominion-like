@@ -26,7 +26,7 @@ namespace GameResources
            var pool =  gPool ?? throw new Exception("gPool is null");
         }
 
-        public void Add(ResourceType type, int n)
+        public void Shift(ResourceType type, int n)
         {
             Resources[(int) type] += n;
         }

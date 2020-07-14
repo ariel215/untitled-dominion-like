@@ -12,19 +12,19 @@ public class CardPool: MonoBehaviour
     Dictionary<string, GameObject> cardPrefabs = new Dictionary<string, GameObject>();
 
     [SerializeField]
-    List<string> names;
+    int Size;
 
     private void Start()
     {
         Player = Player.Instance;
         Cards = CardData.LoadList(cardNames);
-        
+        Size = cardPrefabs.Count;
         Cards.Sort((x, y) => x.CompareMin(y));
     }
 
     private void Update()
     {
-        names = new List<string>(cardPrefabs.Keys);
+        
     }
 
 

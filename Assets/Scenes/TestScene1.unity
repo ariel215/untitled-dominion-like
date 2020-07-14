@@ -128,6 +128,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1121402625}
     m_Modifications:
+    - target: {fileID: 1265312558213739932, guid: e175853fab8f49f46816dd906dc1567c,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.14858459
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265312558213739932, guid: e175853fab8f49f46816dd906dc1567c,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8584906
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265312558213739932, guid: e175853fab8f49f46816dd906dc1567c,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.09313814
+      objectReference: {fileID: 0}
     - target: {fileID: 1265312558290101120, guid: e175853fab8f49f46816dd906dc1567c,
         type: 3}
       propertyPath: m_Mesh
@@ -316,6 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Destination: {fileID: 0}
+  nCards: 0
   CardDisplay: {fileID: 0}
 --- !u!114 &15227550
 MonoBehaviour:
@@ -390,6 +406,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1121402625}
     m_Modifications:
+    - target: {fileID: 1265312558213739932, guid: e175853fab8f49f46816dd906dc1567c,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.81143886
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265312558213739932, guid: e175853fab8f49f46816dd906dc1567c,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8396226
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265312558213739932, guid: e175853fab8f49f46816dd906dc1567c,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.30495724
+      objectReference: {fileID: 0}
     - target: {fileID: 1265312558290101120, guid: e175853fab8f49f46816dd906dc1567c,
         type: 3}
       propertyPath: m_Mesh
@@ -653,7 +684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cards: []
   cardNames: {fileID: 4900000, guid: d1ce62b991f1d3548b428653b97e8bfe, type: 3}
-  names: []
+  Size: 0
 --- !u!114 &661347085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -668,7 +699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cards: []
   cardNames: {fileID: 4900000, guid: 8114f6f04548eaf44a52ab5beaf53f89, type: 3}
-  names: []
+  Size: 0
 --- !u!4 &661347086
 Transform:
   m_ObjectHideFlags: 0
@@ -705,6 +736,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1121402625}
     m_Modifications:
+    - target: {fileID: 1265312558213739932, guid: e175853fab8f49f46816dd906dc1567c,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.8396226
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265312558213739932, guid: e175853fab8f49f46816dd906dc1567c,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.22574759
+      objectReference: {fileID: 0}
+    - target: {fileID: 1265312558213739932, guid: e175853fab8f49f46816dd906dc1567c,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.22574759
+      objectReference: {fileID: 0}
     - target: {fileID: 1265312558290101120, guid: e175853fab8f49f46816dd906dc1567c,
         type: 3}
       propertyPath: m_Mesh
@@ -1213,7 +1259,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Destination: {fileID: 0}
-  RandomCardPool: {fileID: 661347085}
+  nCards: 0
+  RandomCardPool: {fileID: 0}
   FixedCardPool: {fileID: 0}
   MarketSize: 4
 --- !u!1 &1579513102
@@ -1449,6 +1496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Destination: {fileID: 1579513105}
+  nCards: 0
 --- !u!212 &2003853535
 SpriteRenderer:
   m_ObjectHideFlags: 0

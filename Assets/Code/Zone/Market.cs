@@ -31,14 +31,32 @@ namespace Zones
             Destination = Discard.gDiscard;
             RandomCardPool = GameRunner.Runner.RandomPool;
             FixedCardPool = GameRunner.Runner.FixedPool;
-         
         }
 
-        // Update is called once per frame
-        void Update()
+        public static bool CanBuy(Cards.CardData card)
         {
-            
+            var pool = GameResources.ResourcePool.gPool;
+            var idx = (int)card.CostType();
+            var available = pool.Resources[idx];
+            return (available >= card.Cost());
         }
+
+        public override bool Move(Cards.CardData card)
+        {
+            if (CanBuy(card))
+            {
+                GameResources.ResourcePool.gPool.Shift(
+                    card.CostType(), -card.Cost()
+                    );
+                return base.Move(card);
+                
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 
         public void ResetCards()
         {
@@ -53,6 +71,7 @@ namespace Zones
             {
                 Add(newcard);
             }
+
             Add(FixedCardPool.Select(1)[0]);
         }
     }

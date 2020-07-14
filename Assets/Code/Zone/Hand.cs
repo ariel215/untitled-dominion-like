@@ -1,5 +1,6 @@
-﻿using UnityEngine;
+﻿using UnityEngine.Events;
 using System.Collections;
+using Cards;
 
 namespace Zones
 {
@@ -15,17 +16,21 @@ namespace Zones
             gHand = this;
         }
 
-        
-
         // Use this for initialization
         new void Start()
         {
             Size = HandSize;
             base.Start();
             Destination = Discard.gDiscard;
+            
         }
 
- 
+        public override bool Move(CardData card)
+        {
+            card.ApplyEffects();
+            return base.Move(card);
+        }
+
         public void ResetCards()
         {
             for (int i = 0; i < Cards.Count; ++i)
