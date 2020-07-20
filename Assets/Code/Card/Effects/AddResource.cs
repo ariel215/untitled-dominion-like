@@ -1,21 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameResources;
 
 namespace Effects
 {
     public class AddResource : Effect
     {
-        public GameResources.ResourceType Kind;
+        public ResourceType Kind;
 
         public int Amount;
 
 
         public override void Apply()
         {
-            GameResources.ResourcePool.gPool.Shift(
+            ResourcePool.gPool.Shift(
                 Kind, Amount
                 );
+        }
+
+        public override string ToString()
+        {
+            return $"+{Amount} {Kind.String()}";
         }
     }
 }

@@ -13,7 +13,11 @@ namespace Effects
 
         public abstract void Apply();
 
-        
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
     };
     
 
