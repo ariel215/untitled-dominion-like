@@ -16,7 +16,7 @@ public class CardPool: MonoBehaviour
 
     private void Start()
     {
-        Player = Player.Instance;
+        Player = Player.gPlayer;
         Cards = CardData.LoadList(cardNames);
         Size = cardPrefabs.Count;
         Cards.Sort((x, y) => x.CompareMin(y));

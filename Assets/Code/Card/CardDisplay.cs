@@ -14,9 +14,11 @@ public class CardDisplay : MonoBehaviour
     private static Dictionary<string, GameObject> Prefabs = new Dictionary<string, GameObject>();
 
     public Vector2 LeftEdge;
-    public float CardSize;
-    public float MarginSize;
-    SpriteRenderer renderer;
+    float CardSize;
+    public int NCards;
+    public GameObject CardTemplate;
+
+    SpriteRenderer background;
 
     // List of cards being rendered
     public List<GameObject> CardObjects = new List<GameObject>();
@@ -26,9 +28,12 @@ public class CardDisplay : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        renderer = GetComponent<SpriteRenderer>();
-        LeftEdge = transform.position;
-        LeftEdge.x -= renderer.bounds.extents.x;
+        background = GetComponent<SpriteRenderer>();
+        LeftEdge = new Vector2(background.bounds.min.x, background.bounds.center.y);
+        var width = background.bounds.max.x - background.bounds.min.x;
+        CardSize = width / NCards;
+        LeftEdge.x += CardSize / 2;
+
     }
 
     // Update is called once per frame
@@ -37,7 +42,7 @@ public class CardDisplay : MonoBehaviour
         for (int i = 0; i < CardObjects.Count; ++i)
         {
             var pos = new Vector2(LeftEdge.x, LeftEdge.y);
-            pos.x += i * 2 * (MarginSize + CardSize);
+            pos.x += i * CardSize;
             if (CardObjects[i] != null)
             {
                 CardObjects[i].transform.position = pos;
@@ -55,31 +60,34 @@ public class CardDisplay : MonoBehaviour
                 CardObjects.Add(null);
             }
         }
-        
-        
-        var name = cardData.Name();
 
-        // Initialize cache if necessary
-        if (!Prefabs.ContainsKey(name))
-        {
-            var fab = Resources.Load<GameObject>($"Cards/Prefabs/{name}");
-            Prefabs[name] = fab ?? throw new System.Exception($"Could not find prefab {name}")
-;
-        }
-
-        var card = Instantiate(Prefabs[name]);
-        // take the opportunity to initialize card size
-        if (CardSize == 0)
-        {
-            var renderer = card.GetComponent<SpriteRenderer>();
-            CardSize = renderer.bounds.extents.x;
-            LeftEdge.x += CardSize + MarginSize;
-        }
+        GameObject card = GetPrefab(cardData);
+        
         CardObjects[idx] = card;
         var button = card.GetComponent<ButtonLike>();
         owner.RegisterCallbacks(button.OnClick, cardData);
-        
+
     }
+
+    private GameObject GetPrefab(CardData cardData)
+    {
+        var name = cardData.name;
+        
+        // Initialize cache if necessary
+        if (!Prefabs.ContainsKey(name))
+        {
+            GameObject template = Instantiate(CardTemplate);
+            template.SetActive(false);
+            template.GetComponent<CardTemplate>().Init(cardData);
+            Prefabs[name] = template;
+;
+        }
+
+        var fab = Instantiate(Prefabs[name]);
+        fab.SetActive(true);
+        return fab;
+    }
+
 
     public void Remove(int idx)
     {

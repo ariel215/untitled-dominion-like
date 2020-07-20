@@ -22,7 +22,7 @@ namespace GameResources
         // Update is called once per frame
         void Update()
         {
-            text.text = $"{ResourcePool.gPool.Resources[(int)type]}";
+            text.text = $"{ResourcePool.gPool.Resources[type]}";
         }
     }
 }

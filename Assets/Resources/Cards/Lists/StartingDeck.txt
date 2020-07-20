@@ -1,10 +1,7 @@
-TestCard
-TestCard
-TestCard
-TestCard
-TestCard
-TestCard
-TestCard
-TestCard
-TestCard
-TestCard
+Ponder
+Ponder
+Ponder
+Ponder
+Taunt
+Taunt
+Taunt

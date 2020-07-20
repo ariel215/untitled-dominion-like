@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player: ScriptableObject
 {
     private static Player _instance = null;
-    public static Player Instance
+    public static Player gPlayer
     {
         get
         {
@@ -25,6 +25,8 @@ public class Player: ScriptableObject
     {
         return health;
     }
+
+    public float MaxHealth;
 
 
 

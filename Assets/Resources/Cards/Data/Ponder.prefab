@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   costType: 0
-  cardName: Test Card
-  cost: 2
+  cardName: Ponder
+  cost: 1
   min_damage: 0
-  max_damage: 100
+  max_damage: 30
   kind: 0
   effects: []
 --- !u!114 &-3153048370641015928

@@ -1,20 +1,55 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 namespace GameResources
 {
 
-    public enum ResourceType { Early = 0, Mid=1, Late=2};
+    public enum ResourceType { Early, Mid, Late, Damage };
 
+
+    public static class ResourceTypeMethods
+    {
+        public static string String(this ResourceType type)
+        {
+            switch (type)
+            {
+                case ResourceType.Early:
+                    return "E";
+                case ResourceType.Mid:
+                    return "M";
+                case ResourceType.Late:
+                    return "L";
+                case ResourceType.Damage:
+                    return "D";
+                default:
+                    throw new Exception("Unhandled resource type");
+            }
+        }
+    }
+
+
+    
     public class ResourcePool : MonoBehaviour
     {
 
         public static ResourcePool gPool;
 
         [SerializeField]
-        private int[] BaseResourceNumber = { 0, 0, 0 };
+        private Dictionary<ResourceType,int> BaseResourceNumber = new Dictionary<ResourceType, int>{
+            {ResourceType.Early, 0 },
+            {ResourceType.Mid, 0 },
+            {ResourceType.Late, 0 },
+            { ResourceType.Damage, 0}
+            };
 
-        public int[] Resources = { 0, 0, 0 };
+        public Dictionary<ResourceType, int> Resources = new Dictionary<ResourceType, int>
+        {
+            {ResourceType.Early, 0 },
+            {ResourceType.Mid, 0 },
+            {ResourceType.Late, 0 },
+            { ResourceType.Damage, 0}
+        };
 
         public ResourcePool()
         {
@@ -28,14 +63,15 @@ namespace GameResources
 
         public void Shift(ResourceType type, int n)
         {
-            Resources[(int) type] += n;
+            Resources[type] += n;
         }
 
         public void Reset()
         {
-            foreach (var i in Enum.GetValues(typeof(ResourceType)))
+            Opponent.gOpponent.DealDamage(Resources[ResourceType.Damage]);
+            foreach (var i in BaseResourceNumber.Keys)
             {
-                Resources[(int)i] = BaseResourceNumber[(int)i];
+                Resources[i] = BaseResourceNumber[i];   
             }
         }
     }

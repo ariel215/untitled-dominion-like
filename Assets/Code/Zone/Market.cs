@@ -36,8 +36,8 @@ namespace Zones
         public static bool CanBuy(Cards.CardData card)
         {
             var pool = GameResources.ResourcePool.gPool;
-            var idx = (int)card.CostType();
-            var available = pool.Resources[idx];
+            var type = card.CostType();
+            var available = pool.Resources[type];
             return (available >= card.Cost());
         }
 

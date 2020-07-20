@@ -43,7 +43,6 @@ namespace Cards
         private void Awake()
         {
             effects = GetComponents<Effect>();
-            Debug.Log($"{effects.GetLength(0)} effects in {name}");
         }
 
 
@@ -69,7 +68,7 @@ namespace Cards
                 {
                     cardCache[name] = Resources.Load<CardData>($"Cards/Data/{name}");
                 }
-                var data = Instantiate(cardCache[name]);
+                var data = Instantiate(cardCache[name] ?? throw new Exception($"Could not load {name}"));
                 cards.Add(data ?? throw new Exception($"Could not load {name}"));
             }
             return cards;
@@ -82,6 +81,11 @@ namespace Cards
             {
                 effect.Apply();
             }
+        }
+
+        public string Text()
+        {
+            return String.Concat<Effect>(effects);
         }
         
     }
