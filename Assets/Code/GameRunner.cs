@@ -39,6 +39,7 @@ public class GameRunner  : MonoBehaviour
     {
         Hand.gHand.ResetCards();
         Market.gMarket.ResetCards();
+        GameResources.ResourcePool.gPool.Reset();
     }
 
     

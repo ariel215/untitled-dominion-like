@@ -85,7 +85,8 @@ namespace Cards
 
         public string Text()
         {
-            return String.Concat<Effect>(effects);
+            return string.Join<Effect>("\n", effects);
+            
         }
         
     }

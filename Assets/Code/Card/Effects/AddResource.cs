@@ -9,7 +9,7 @@ namespace Effects
     {
         public ResourceType Kind;
 
-        public int Amount;
+        public int Amount = 1;
 
 
         public override void Apply()

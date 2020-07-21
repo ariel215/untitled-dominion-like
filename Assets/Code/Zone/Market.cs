@@ -75,7 +75,6 @@ namespace Zones
                 Display.Remove(i);
             }
 
-            Debug.Log(RandomCardPool.Cards.Count);
             foreach (var newcard in RandomCardPool.Select(MarketSize))
             {
                 Add(newcard);

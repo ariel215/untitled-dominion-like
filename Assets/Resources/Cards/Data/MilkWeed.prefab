@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8682071436361842692}
   - component: {fileID: 2677887621357750270}
-  - component: {fileID: -5899416422230366028}
+  - component: {fileID: -668794330217428074}
   m_Layer: 0
-  m_Name: FixedCard
+  m_Name: MilkWeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,13 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   costType: 0
-  cardName: Meditate
-  cost: 3
-  min_damage: 0
+  cardName: Milkweed
+  cost: 4
+  min_damage: 10
   max_damage: 30
-  kind: 1
+  kind: 0
   effects: []
---- !u!114 &-5899416422230366028
+--- !u!114 &-668794330217428074
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,8 +60,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 98058831039506856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b25a20ff79a9f9b4090415a3ac449c8b, type: 3}
+  m_Script: {fileID: 11500000, guid: 496aa7d0b273c91448771a218a27e3b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Kind: 0
-  Amount: 2
+  Num: 2

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1937846510502596987}
   - component: {fileID: 1925128016138201772}
-  - component: {fileID: 9170330851434208853}
+  - component: {fileID: 158013586789851872}
   m_Layer: 0
-  m_Name: Taunt
+  m_Name: Verbana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,13 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   costType: 1
-  cardName: Taunt
-  cost: 0
+  cardName: Verbana
+  cost: 3
   min_damage: 0
   max_damage: 45
   kind: 1
   effects: []
---- !u!114 &9170330851434208853
+--- !u!114 &158013586789851872
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,7 +60,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8035627109068969460}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f41e4478795b37148a9bca51ad8b54ba, type: 3}
+  m_Script: {fileID: 11500000, guid: b25a20ff79a9f9b4090415a3ac449c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Amount: 1
+  Kind: 0
+  Amount: 2

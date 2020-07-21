@@ -12,6 +12,7 @@ namespace Zones
         public Zone Destination;
         [SerializeField]
         private int nCards;
+        public abstract int Count();
 
         private void Update()
         {
@@ -80,6 +81,11 @@ namespace Zones
             return Cards;
         }
 
+        public override int Count()
+        {
+            return Cards.Count;
+        }
+
         protected override bool Add(CardData card)
         {
             Cards.Push(card);
@@ -109,6 +115,11 @@ namespace Zones
         public override IEnumerable<CardData> GetCards()
         {   
             return Cards;
+        }
+
+        public override int Count()
+        {
+            return Cards.Count;
         }
 
         public override void Start()
