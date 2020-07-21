@@ -113,7 +113,6 @@ namespace Zones
 
         public override void Start()
         {
-            Debug.Log("Array.Start");
             Display = GetComponent<CardDisplay>();
             for (int i = 0; i < Size; ++i)
             {

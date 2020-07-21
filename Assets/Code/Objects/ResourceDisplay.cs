@@ -10,19 +10,21 @@ namespace GameResources
     public class ResourceDisplay : MonoBehaviour
     {
 
-        private TMP_Text text;
+        public TMP_Text Count;
+        public TMP_Text Kind;
+
         public ResourceType type;
 
         // Start is called before the first frame update
         void Start()
         {
-            text = GetComponent<TMP_Text>();
+            Kind.text = type.String();
         }
 
         // Update is called once per frame
         void Update()
         {
-            text.text = $"{ResourcePool.gPool.Resources[type]}";
+            Count.text = $"{ResourcePool.gPool.Resources[type]}";
         }
     }
 }

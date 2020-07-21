@@ -49,7 +49,7 @@ public class CardPool: MonoBehaviour
         for (var i = 0; i < n; i++)
         {
             selected.Add(
-                playable[(int)UnityEngine.Random.Range(0, playable.Count)]
+                Instantiate(playable[(int)UnityEngine.Random.Range(0, playable.Count)])
                 );
             
         }

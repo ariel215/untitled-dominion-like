@@ -11,7 +11,9 @@ namespace Zones
         public static Deck gDeck { get; private set; }
         System.Random Random;
 
-        
+        [SerializeField]
+        private List<CardData> cards;
+
         public Deck()
         {
             gDeck = this;
@@ -83,7 +85,7 @@ namespace Zones
         // Update is called once per frame
         void Update()
         {
-
+            cards = new List<CardData>(GetCards());
         }
     }
 }

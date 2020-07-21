@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 
 namespace Zones
@@ -12,6 +13,8 @@ namespace Zones
 
         public int MarketSize = 4;
 
+        [SerializeField]
+        private List<Cards.CardData> cards = new List<Cards.CardData>();
 
 
         public Market()
@@ -31,6 +34,12 @@ namespace Zones
             Destination = Discard.gDiscard;
             RandomCardPool = GameRunner.Runner.RandomPool;
             FixedCardPool = GameRunner.Runner.FixedPool;
+        }
+
+        private void Update()
+        {
+            cards.Clear();
+            cards.AddRange(GetCards());
         }
 
         public static bool CanBuy(Cards.CardData card)

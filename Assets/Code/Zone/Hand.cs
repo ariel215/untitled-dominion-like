@@ -1,6 +1,4 @@
-﻿using UnityEngine.Events;
-using System.Collections;
-using Cards;
+﻿using Cards;
 
 namespace Zones
 {
@@ -22,14 +20,10 @@ namespace Zones
             Size = HandSize;
             base.Start();
             Destination = Discard.gDiscard;
+            CardActions.Add((CardData c) => c.ApplyEffects());
             
         }
 
-        public override bool Move(CardData card)
-        {
-            card.ApplyEffects();
-            return base.Move(card);
-        }
 
         public void ResetCards()
         {
