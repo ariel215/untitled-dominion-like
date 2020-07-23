@@ -5,11 +5,12 @@ using System.Collections.Generic;
 namespace GameResources
 {
 
-    public enum ResourceType { Early, Mid, Late, Damage };
+    public enum ResourceType { Early, Mid, Late, Damage, Shield };
 
 
     public static class ResourceTypeMethods
-    {
+    {   
+
         public static string String(this ResourceType type)
         {
             switch (type)
@@ -22,9 +23,25 @@ namespace GameResources
                     return "L";
                 case ResourceType.Damage:
                     return "D";
+                case ResourceType.Shield:
+                    return "S";
                 default:
                     throw new Exception("Unhandled resource type");
             }
+        }
+
+        public static ResourceType FromString(string str)
+        {
+            foreach(ResourceType t in Enum.GetValues(typeof(ResourceType)))
+            {
+                if (String(t) == str)
+                {
+                    return t;
+                }
+
+            }
+            throw new Exception("Could not parse string to message type");
+
         }
     }
 

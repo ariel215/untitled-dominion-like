@@ -35,8 +35,8 @@ namespace Cards
         private Kind kind;
         public Kind Kind() { return kind; }
 
-        [SerializeField]
-        public Effect[] effects;
+        [SerializeField] 
+        public Effect[] effects;        
 
         static Dictionary<string, CardData> cardCache = new Dictionary<string, CardData>();
 

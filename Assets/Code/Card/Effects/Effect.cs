@@ -18,6 +18,11 @@ namespace Effects
             return base.ToString();
         }
 
+        public static Effect FromText(string input)
+        {
+            throw new NotImplementedException();
+        }
+
     };
     
 
